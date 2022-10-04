@@ -1,13 +1,11 @@
 import { IStyles } from "src/common/interfaces";
 
 const styles: IStyles = {
-  containerWrapper: {
-    height: "100vh",
+  usersList: {
     display: "flex",
-    flexDirection: "column",
-  },
-  container: {
-    flex: 1,
+    justifyContent: "center",
+    flexWrap: "wrap",
+    mt: 2,
   },
 };
 

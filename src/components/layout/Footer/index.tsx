@@ -5,7 +5,7 @@ import styles from "./styles";
 const Footer = () => {
   return (
     <Box sx={styles.footer}>
-      <Typography variant={"body2"} component={"span"}>
+      <Typography variant={"body2"} fontWeight={600} component={"span"}>
         Made By Andrey Burtsev
       </Typography>
     </Box>

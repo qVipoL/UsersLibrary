@@ -5,24 +5,29 @@ import { IUser } from "src/common/interfaces";
 import Wrapper from "src/components/layout/Wrapper";
 import { StoreType } from "src/store";
 import { getUsersAndDispatch } from "src/store/actions/userActions";
+import UsersList from "../../components/organisms/Lists/UsersList";
 
 const HomePage = () => {
   const dispatch = useDispatch();
+  const users = useSelector((store: StoreType) => store.userStore);
+  const [usersState, setUsersState] = useState<IUser[]>(users);
 
   useEffect(() => {
     setTimeout(() => getUsersAndDispatch(dispatch), 3000);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  const users = useSelector((store: StoreType) => store.userStore);
-  const [userState, setUserState] = useState<IUser[]>(users);
-
   useEffect(() => {
-    setUserState(users);
+    setUsersState(users);
   }, [users]);
 
   return (
     <Wrapper>
-      {userState.length > 0 ? <>{"hello"}</> : <CircularProgress />}
+      {usersState.length > 0 ? (
+        <UsersList users={usersState} />
+      ) : (
+        <CircularProgress />
+      )}
     </Wrapper>
   );
 };

@@ -1,0 +1,52 @@
+import {
+  Avatar,
+  Button,
+  Card,
+  CardContent,
+  CardHeader,
+  IconButton,
+  Typography,
+} from "@mui/material";
+import React, { FC } from "react";
+import { IUser } from "src/common/interfaces";
+import styles from "./styles";
+import DeleteIcon from "@mui/icons-material/Delete";
+
+interface ICardProps {
+  user: IUser;
+}
+
+const UserCard: FC<ICardProps> = ({ user }) => {
+  return (
+    <Card sx={styles.card} variant={"outlined"}>
+      <CardHeader
+        avatar={<Avatar sx={styles.avatar} src={user.picture.medium} />}
+        action={
+          <IconButton>
+            <DeleteIcon color="error" />
+          </IconButton>
+        }
+      />
+      <CardContent sx={styles.cardContent}>
+        <Typography variant="body1" sx={styles.cardTitle}>
+          {`${user.name.title} ${user.name.first} ${user.name.last}`}
+        </Typography>
+        <Typography variant="body1" sx={styles.cardSubtitle}>
+          {user.email}
+        </Typography>
+        <Typography component={"p"} variant="body2" sx={styles.cardBody}>
+          {`${user.location.country}, ${user.location.city}`} <br />
+          {`${user.location.street.name}, ${user.location.street.number}`}
+        </Typography>
+        <Typography variant="body2" sx={styles.cardFooter}>
+          {user.login.uuid}
+        </Typography>
+        <Button variant="outlined" sx={styles.cardButton}>
+          Edit
+        </Button>
+      </CardContent>
+    </Card>
+  );
+};
+
+export default UserCard;
