@@ -3,15 +3,16 @@ import { IStyles } from "src/common/interfaces";
 const styles: IStyles = {
   modal: {
     position: "absolute",
-    top: "45%",
+    top: "50%",
     left: "50%",
     transform: "translate(-50%, -50%)",
     bgcolor: "white",
     width: "300px",
-    height: "200px",
+    height: "75%",
     boxShadow: 24,
     outline: "none",
     borderRadius: 2,
+    overflowY: "scroll",
   },
   innerContainer: {
     textAlign: "center",

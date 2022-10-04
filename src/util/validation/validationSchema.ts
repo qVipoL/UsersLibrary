@@ -15,8 +15,14 @@ const {
 
 const validationSchema = {
   editUserForm: yup.object().shape({
-    [firstName.name]: yup.string().required(firstName.requiredErrorMsg),
-    [lastName.name]: yup.string().required(lastName.requiredErrorMsg),
+    [firstName.name]: yup
+      .string()
+      .min(3, firstName.lengthError)
+      .required(firstName.requiredErrorMsg),
+    [lastName.name]: yup
+      .string()
+      .min(3, lastName.lengthError)
+      .required(lastName.requiredErrorMsg),
     [email.name]: yup
       .string()
       .email(email.emailError)

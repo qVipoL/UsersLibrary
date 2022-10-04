@@ -15,6 +15,7 @@ import { deleteUser } from "src/store/actions/userActions";
 import { useDispatch, useSelector } from "react-redux";
 import { StoreType } from "src/store";
 import DeleteModal from "src/components/organisms/Modals/DeleteModal";
+import EditModal from "src/components/organisms/Modals/EditModal";
 
 interface ICardProps {
   user: IUser;
@@ -24,6 +25,7 @@ const UserCard: FC<ICardProps> = ({ user }) => {
   const dispatch = useDispatch();
   const users = useSelector((store: StoreType) => store.userStore);
   const [isDeleteModalOpen, setDeleteModalOpen] = useState<boolean>(false);
+  const [isEditModalOpen, setEditModalOpen] = useState<boolean>(false);
 
   const deleteHandler = () => {
     deleteUser(dispatch, users, user.login.uuid);
@@ -34,11 +36,8 @@ const UserCard: FC<ICardProps> = ({ user }) => {
       <CardHeader
         avatar={<Avatar sx={styles.avatar} src={user.picture.medium} />}
         action={
-          <IconButton>
-            <DeleteIcon
-              color="error"
-              onClick={() => setDeleteModalOpen(true)}
-            />
+          <IconButton onClick={() => setDeleteModalOpen(true)}>
+            <DeleteIcon color="error" />
           </IconButton>
         }
       />
@@ -56,7 +55,11 @@ const UserCard: FC<ICardProps> = ({ user }) => {
         <Typography variant="body2" sx={styles.cardFooter}>
           {user.login.uuid}
         </Typography>
-        <Button variant="outlined" sx={styles.cardButton}>
+        <Button
+          variant="outlined"
+          sx={styles.cardButton}
+          onClick={() => setEditModalOpen(true)}
+        >
           Edit
         </Button>
       </CardContent>
@@ -66,6 +69,15 @@ const UserCard: FC<ICardProps> = ({ user }) => {
           open={isDeleteModalOpen}
           onClose={() => setDeleteModalOpen(false)}
           onConfirm={deleteHandler}
+        />
+      )}
+
+      {isEditModalOpen && (
+        <EditModal
+          open={isEditModalOpen}
+          onClose={() => setEditModalOpen(false)}
+          user={user}
+          title="Edit User"
         />
       )}
     </Card>

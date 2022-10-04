@@ -13,9 +13,9 @@ const HomePage = () => {
   const [usersState, setUsersState] = useState<IUser[]>(users);
 
   useEffect(() => {
-    setTimeout(() => getUsersAndDispatch(dispatch), 3000);
+    setTimeout(() => getUsersAndDispatch(dispatch), 1000);
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [usersState.length === 0]);
 
   useEffect(() => {
     setUsersState(users);

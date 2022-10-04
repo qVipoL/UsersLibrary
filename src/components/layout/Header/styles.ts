@@ -3,7 +3,9 @@ import { IStyles } from "src/common/interfaces";
 const styles: IStyles = {
   header: {
     textAlign: "center",
-    mt: 2,
+    py: 2,
+    mb: 2,
+    bgcolor: "#191a19",
   },
 };
 

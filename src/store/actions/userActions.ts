@@ -16,7 +16,7 @@ export const getUsersAndDispatch = async (dispatch: Dispatch) => {
   }
 };
 
-export const updateUsers = (
+export const updateUser = (
   dispatch: Dispatch,
   users: IUser[],
   update: IUpdateUser
@@ -37,6 +37,7 @@ export const updateUsers = (
     user.name.last = update.lastName;
     user.login.uuid = update.id;
     user.picture.medium = user.picture.medium || DEFAULT_AVATAR;
+
     dispatch({ type: UPDATE_USERS_ACTION, payload: users });
   } else {
     user = {

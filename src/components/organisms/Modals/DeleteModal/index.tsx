@@ -17,17 +17,24 @@ const DeleteModal: FC<IDeleteModalProps> = ({ open, onClose, onConfirm }) => {
         <Fade in={open} timeout={300}>
           <Box sx={styles.modal}>
             <Grid container sx={styles.innerContainer}>
-              <Grid item mt={3} xs={12}>
+              <Grid
+                bgcolor={"#191a19"}
+                borderRadius="8px 8px 0 0"
+                item
+                py={2}
+                mb={2}
+                xs={12}
+              >
                 <Typography
                   variant={"h4"}
                   component={"h5"}
-                  color={"black"}
+                  color={"white"}
                   fontWeight={500}
                 >
-                  Confirmation
+                  Alert
                 </Typography>
                 <IconButton onClick={onClose} sx={styles.icon}>
-                  <CloseIcon />
+                  <CloseIcon sx={{ color: "white" }} />
                 </IconButton>
               </Grid>
               <Grid item xs={12} mt={1}>

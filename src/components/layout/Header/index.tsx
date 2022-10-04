@@ -5,7 +5,7 @@ import styles from "./styles";
 const Header = () => {
   return (
     <Box sx={styles.header}>
-      <Typography variant={"h3"} component={"h1"}>
+      <Typography variant={"h3"} component={"h1"} color="white">
         Users Library
       </Typography>
     </Box>

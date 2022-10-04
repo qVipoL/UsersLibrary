@@ -5,7 +5,11 @@ const styles: IStyles = {
     display: "flex",
     justifyContent: "center",
     flexWrap: "wrap",
-    mt: 2,
+  },
+  addNew: {
+    my: 2,
+    display: "flex",
+    justifyContent: "center",
   },
 };
 
