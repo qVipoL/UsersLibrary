@@ -20,7 +20,10 @@
     "react-dom": "^18.2.0",
     "react-hook-form": "^7.36.0",
     "react-scripts": "5.0.1",
+    "redux": "^4.2.0",
+    "redux-thunk": "^2.4.1",
     "styled-components": "^5.3.5",
+    "thunk": "^0.0.1",
     "typescript": "^4.8.3",
     "web-vitals": "^2.1.4"
   },
