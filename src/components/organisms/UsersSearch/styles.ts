@@ -5,6 +5,7 @@ const styles: IStyles = {
     display: "flex",
     justifyContent: "center",
     my: 2,
+    flexWrap: "wrap",
   },
 };
 

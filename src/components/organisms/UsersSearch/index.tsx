@@ -8,6 +8,7 @@ import Radio from "@mui/material/Radio";
 import UsersService, { USER_FILTERS } from "src/services/UsersService";
 import { useSelector } from "react-redux";
 import { StoreType } from "src/store";
+import useMediaQuery from "@mui/material/useMediaQuery";
 
 interface IUsersSearchProps {
   setUsers: Function;
@@ -17,6 +18,8 @@ const UsersSearch: FC<IUsersSearchProps> = ({ setUsers }) => {
   const [search, setSearch] = useState<string>("");
   const [filter, setFilter] = useState<USER_FILTERS>(USER_FILTERS.ID);
   const users = useSelector((store: StoreType) => store.userStore);
+
+  const mobile = useMediaQuery("(max-width:330px)");
 
   const searchChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setSearch(event.target.value);
@@ -34,10 +37,17 @@ const UsersSearch: FC<IUsersSearchProps> = ({ setUsers }) => {
   return (
     <Box>
       <Box sx={styles.inputContainer}>
+        <TextField
+          label="Search"
+          sx={{ bgcolor: "white" }}
+          onChange={searchChange}
+        />
+      </Box>
+      <Box sx={styles.inputContainer}>
         <FormControl>
           <RadioGroup
             defaultValue={USER_FILTERS.ID}
-            row
+            row={mobile ? false : true}
             onChange={filterChange}
           >
             <FormControlLabel
@@ -62,13 +72,6 @@ const UsersSearch: FC<IUsersSearchProps> = ({ setUsers }) => {
             />
           </RadioGroup>
         </FormControl>
-      </Box>
-      <Box sx={styles.inputContainer}>
-        <TextField
-          label="Search"
-          sx={{ bgcolor: "white" }}
-          onChange={searchChange}
-        />
       </Box>
     </Box>
   );

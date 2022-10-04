@@ -9,5 +9,3 @@ export enum ROUTES {
 export const publicRoutes: IRoute[] = [
   { path: ROUTES.HOME, Component: HomePage },
 ];
-
-export const privateRoutes: IRoute[] = [];
