@@ -21,9 +21,11 @@ class UsersService {
           user.login.uuid.toLowerCase().includes(value.toLowerCase());
       case USER_FILTERS.NAME:
         return (user: IUser, value: string) =>
-          user.name.title.toLowerCase().includes(value.toLowerCase()) ||
-          user.name.first.toLowerCase().includes(value.toLowerCase()) ||
-          user.name.last.toLowerCase().includes(value.toLowerCase());
+          user.name.title
+            .toLowerCase()
+            .concat(" " + user.name.first.toLowerCase())
+            .concat(" " + user.name.last.toLowerCase())
+            .includes(value.toLowerCase());
       case USER_FILTERS.EMAIL:
         return (user: IUser, value: string) =>
           user.email.toLowerCase().includes(value.toLowerCase());
