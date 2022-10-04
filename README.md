@@ -7,6 +7,7 @@ A simple users list, you can add, remove, edit and filter users.<br/>
 Written With:
 
 - React
+- MUI
 - Typescript
 - Redux
 - Formik

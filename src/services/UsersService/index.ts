@@ -31,12 +31,7 @@ class UsersService {
         return (user: IUser, value: string) =>
           user.location.country.toLowerCase().includes(value.toLowerCase()) ||
           user.location.city.toLowerCase().includes(value.toLowerCase()) ||
-          user.location.street.name
-            .toLowerCase()
-            .includes(value.toLowerCase()) ||
-          user.location.street.number
-            .toLowerCase()
-            .includes(value.toLowerCase());
+          user.location.street.name.toLowerCase().includes(value.toLowerCase());
     }
   }
 

@@ -42,7 +42,7 @@ export const updateUser = (
   } else {
     user = {
       name: {
-        title: "Mr.",
+        title: "",
         first: update.firstName,
         last: update.lastName,
       },
