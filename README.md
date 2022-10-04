@@ -1,8 +1,9 @@
-# Users Library (Appsforce Home Assignment)
+# Users Library 📚 (Appsforce Home Assignment)
 
 ## Info ℹ
 
-A Simple users list, you can add, remove, edit and filter users.
+A simple users list, you can add, remove, edit and filter users.<br/>
+[Link to live website](https://startling-axolotl-786481.netlify.app/)<br/>
 Written With:
 
 - React
