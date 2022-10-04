@@ -1,4 +1,3 @@
-import { CircularProgress } from "@mui/material";
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { IUser } from "src/common/interfaces";
@@ -13,21 +12,17 @@ const HomePage = () => {
   const [usersState, setUsersState] = useState<IUser[]>(users);
 
   useEffect(() => {
-    setTimeout(() => getUsersAndDispatch(dispatch), 1000);
+    getUsersAndDispatch(dispatch);
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [usersState.length === 0]);
+  }, []);
 
   useEffect(() => {
-    setUsersState(users);
+    setUsersState([...users]);
   }, [users]);
 
   return (
     <Wrapper>
-      {usersState.length > 0 ? (
-        <UsersList users={usersState} />
-      ) : (
-        <CircularProgress />
-      )}
+      <UsersList users={usersState} setUsers={setUsersState} />
     </Wrapper>
   );
 };
