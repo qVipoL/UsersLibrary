@@ -12,10 +12,9 @@ import {
 } from "src/util";
 import EditUserForm from "../../Forms/EditUserForm";
 import { IUser } from "src/common/interfaces";
-import { StoreType } from "src/store";
-import { useDispatch, useSelector } from "react-redux";
-import { updateUser } from "src/store/actions/userActions";
 import { v4 } from "uuid";
+import { useAppDispatch, useAppSelector } from "src/hooks/redux";
+import { userActions } from "src/store/slices/userSlice";
 
 interface IEditModalProps {
   open: boolean;
@@ -25,8 +24,8 @@ interface IEditModalProps {
 }
 
 const EditModal: FC<IEditModalProps> = ({ open, onClose, user, title }) => {
-  const users = useSelector((store: StoreType) => store.userStore);
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
+  const { users } = useAppSelector((state) => state.userReducer);
 
   const submitForm = async (
     values: FormikValues,
@@ -43,16 +42,18 @@ const EditModal: FC<IEditModalProps> = ({ open, onClose, user, title }) => {
 
     actions.setTouched({});
     actions.setSubmitting(false);
-    updateUser(dispatch, users, {
-      id: user?.login.uuid || v4(),
-      email: values.email,
-      city: values.city,
-      country: values.country,
-      streetName: values.streetName,
-      streetNumber: values.streetNumber,
-      firstName: values.firstname,
-      lastName: values.lastName,
-    });
+    dispatch(
+      userActions.upsertUser({
+        id: user?.login.uuid || v4(),
+        email: values.email,
+        city: values.city,
+        country: values.country,
+        streetName: values.streetName,
+        streetNumber: values.streetNumber,
+        firstName: values.firstname,
+        lastName: values.lastName,
+      })
+    );
     onClose();
   };
 

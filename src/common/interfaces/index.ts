@@ -30,7 +30,7 @@ export interface IUser {
   };
 }
 
-export interface IUpdateUser {
+export interface IUpsertUser {
   id: string;
   email: string;
   city: string;

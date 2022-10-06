@@ -1,28 +1,28 @@
-import React, { useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { IUser } from "src/common/interfaces";
+import React, { useEffect } from "react";
 import Wrapper from "src/components/layout/Wrapper";
-import { StoreType } from "src/store";
-import { getUsersAndDispatch } from "src/store/actions/userActions";
+import { useAppDispatch, useAppSelector } from "src/hooks/redux";
+import { fetchUsers } from "src/store/slices/userSlice";
 import UsersList from "../../components/organisms/Lists/UsersList";
 
 const HomePage = () => {
-  const dispatch = useDispatch();
-  const users = useSelector((store: StoreType) => store.userStore);
-  const [usersState, setUsersState] = useState<IUser[]>(users);
+  const dispatch = useAppDispatch();
+  const { users, isLoading, error } = useAppSelector(
+    (state) => state.userReducer
+  );
 
   useEffect(() => {
-    getUsersAndDispatch(dispatch);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
-
-  useEffect(() => {
-    setUsersState([...users]);
-  }, [users]);
+    dispatch(fetchUsers());
+  }, [dispatch]);
 
   return (
     <Wrapper>
-      <UsersList users={usersState} setUsers={setUsersState} />
+      {isLoading ? (
+        <>Loading</>
+      ) : error ? (
+        <>error</>
+      ) : (
+        <UsersList users={users} />
+      )}
     </Wrapper>
   );
 };

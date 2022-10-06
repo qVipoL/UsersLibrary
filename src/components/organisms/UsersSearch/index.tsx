@@ -6,18 +6,17 @@ import RadioGroup from "@mui/material/RadioGroup";
 import FormControlLabel from "@mui/material/FormControlLabel";
 import Radio from "@mui/material/Radio";
 import UsersService, { USER_FILTERS } from "src/services/UsersService";
-import { useSelector } from "react-redux";
-import { StoreType } from "src/store";
 import useMediaQuery from "@mui/material/useMediaQuery";
+import { useAppSelector } from "src/hooks/redux";
 
 interface IUsersSearchProps {
-  setUsers: Function;
+  setLocalUsers: Function;
 }
 
-const UsersSearch: FC<IUsersSearchProps> = ({ setUsers }) => {
+const UsersSearch: FC<IUsersSearchProps> = ({ setLocalUsers }) => {
   const [search, setSearch] = useState<string>("");
   const [filter, setFilter] = useState<USER_FILTERS>(USER_FILTERS.ID);
-  const users = useSelector((store: StoreType) => store.userStore);
+  const { users } = useAppSelector((state) => state.userReducer);
 
   const mobile = useMediaQuery("(max-width:330px)");
 
@@ -30,7 +29,7 @@ const UsersSearch: FC<IUsersSearchProps> = ({ setUsers }) => {
   };
 
   useEffect(() => {
-    setUsers(UsersService.filterUsers(users, filter, search));
+    setLocalUsers(UsersService.filterUsers(users, filter, search));
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [search]);
 

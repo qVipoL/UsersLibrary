@@ -1,8 +1,10 @@
 import React, { FC } from "react";
 import { Provider } from "react-redux";
-import store from "src/store";
+import { setupStore } from "src/store";
 import AppRouter from "../AppRouter";
 import { BrowserRouter } from "react-router-dom";
+
+const store = setupStore();
 
 const App: FC = () => {
   return (

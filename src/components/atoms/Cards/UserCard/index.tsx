@@ -11,24 +11,22 @@ import React, { FC, useState } from "react";
 import { IUser } from "src/common/interfaces";
 import styles from "./styles";
 import DeleteIcon from "@mui/icons-material/Delete";
-import { deleteUser } from "src/store/actions/userActions";
-import { useDispatch, useSelector } from "react-redux";
-import { StoreType } from "src/store";
 import DeleteModal from "src/components/organisms/Modals/DeleteModal";
 import EditModal from "src/components/organisms/Modals/EditModal";
+import { userActions } from "src/store/slices/userSlice";
+import { useAppDispatch } from "src/hooks/redux";
 
 interface ICardProps {
   user: IUser;
 }
 
 const UserCard: FC<ICardProps> = ({ user }) => {
-  const dispatch = useDispatch();
-  const users = useSelector((store: StoreType) => store.userStore);
+  const dispatch = useAppDispatch();
   const [isDeleteModalOpen, setDeleteModalOpen] = useState<boolean>(false);
   const [isEditModalOpen, setEditModalOpen] = useState<boolean>(false);
 
   const deleteHandler = () => {
-    deleteUser(dispatch, users, user.login.uuid);
+    dispatch(userActions.deleteUser(user.login.uuid));
   };
 
   return (

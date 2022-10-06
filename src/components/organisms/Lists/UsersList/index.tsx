@@ -1,6 +1,6 @@
 import { Box } from "@mui/material";
 import IconButton from "@mui/material/IconButton";
-import React, { FC, useState } from "react";
+import React, { FC, useEffect, useState } from "react";
 import { IUser } from "src/common/interfaces";
 import UserCard from "src/components/atoms/Cards/UserCard";
 import styles from "./styles";
@@ -10,23 +10,28 @@ import UsersSearch from "../../UsersSearch";
 
 interface IUsersListProps {
   users: IUser[];
-  setUsers: Function;
 }
 
-const UsersList: FC<IUsersListProps> = ({ users, setUsers }) => {
+const UsersList: FC<IUsersListProps> = ({ users }) => {
   const [isCreateUserModalOpen, setCreateUserModalOpen] =
     useState<boolean>(false);
 
+  const [localUsers, setLocalUsers] = useState(users);
+
+  useEffect(() => {
+    setLocalUsers(users);
+  }, [users]);
+
   return (
     <>
-      <UsersSearch setUsers={setUsers} />
+      <UsersSearch setLocalUsers={setLocalUsers} />
       <Box sx={styles.addNew}>
         <IconButton size="large" onClick={() => setCreateUserModalOpen(true)}>
           <PersonAddIcon fontSize="large" color="primary" />
         </IconButton>
       </Box>
       <Box sx={styles.usersList}>
-        {users.map((user) => (
+        {localUsers.map((user) => (
           <UserCard key={user.login.uuid} user={user} />
         ))}
       </Box>

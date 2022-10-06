@@ -1,9 +1,16 @@
-import { applyMiddleware, createStore } from "redux";
-import thunk from "redux-thunk";
-import rootReducer from "./reducers/rootReducer";
+import { combineReducers, configureStore } from "@reduxjs/toolkit";
+import { userReducer } from "./slices/userSlice";
 
-export type StoreType = ReturnType<typeof rootReducer>;
+const rootReducer = combineReducers({
+  userReducer,
+});
 
-const store = createStore(rootReducer, applyMiddleware(thunk));
+export const setupStore = () => {
+  return configureStore({
+    reducer: rootReducer,
+  });
+};
 
-export default store;
+export type RootState = ReturnType<typeof rootReducer>;
+export type AppStore = ReturnType<typeof setupStore>;
+export type AppDispatch = AppStore["dispatch"];
